@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "validator_server:USER",
+			"uri": "isfs://validator_server:user/"
+		}
+	],
+	"settings": {
+		"intersystems.servers": {
+			"validator_server": {
+				"webServer": {
+					"host": "127.0.0.1",
+					"port": 52773
+				},
+				"username": "_system"
+			}
+		}
+	}
+}

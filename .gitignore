@@ -1,0 +1,8 @@
+##ignore files and folders
+CSPX
+Ens
+EnsLib
+EnsPortal
+SourceControl
+*.inc
+*.mac
