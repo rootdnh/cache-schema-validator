@@ -6,6 +6,10 @@
 		{
 			"name": "validator_server:USER",
 			"uri": "isfs://validator_server:user/"
+		},
+		{
+			"name": "validator_server:USER web files",
+			"uri": "isfs://validator_server:user"
 		}
 	],
 	"settings": {
