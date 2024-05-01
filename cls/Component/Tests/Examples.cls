@@ -1,7 +1,7 @@
 Class Component.Tests.Examples Extends %RegisteredObject
 {
 
-/// D ##class(User.App).Test()
+/// D ##class(Component.Tests.Examples).Test()
 ClassMethod Test(request = {{"nome":"JOAO", "nomeMae":""}})
 {
 	Set builder = ##class(Component.Validator.Main).%New(request)

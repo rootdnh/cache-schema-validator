@@ -1,7 +1,5 @@
 {
     "objectscript.conn": {
-        "server": "validator_server",
-        "ns": "USER",
         "active": true
     }
 }

@@ -7,3 +7,4 @@ SourceControl
 *.inc
 *.mac
 ##test
+.vscode/
