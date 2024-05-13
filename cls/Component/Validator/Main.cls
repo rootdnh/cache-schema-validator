@@ -30,12 +30,7 @@ Method Required() As Component.Validator.Main
 
 Method String() As Component.Validator.Main
 {
-	If (..Value="") {
-		Do ..Err.%Set("temErro",$$$YES,"boolean")
-		Set erros = ..Err.erros
-		Do:('erros.%IsDefined(..Key)) erros.%Set(..Key,[])
-		Do erros.%Get(..Key).%Push("Required")
-	}
+	Do:(..Request.%GetTypeOf(..Key)'="string") ..RecordError("String")
 	Return $This
 }
 
@@ -56,4 +51,3 @@ Method %OnNew(request As %DynamicObject) As %Status [ Private, ServerOnly = 1 ]
 }
 
 }
-
