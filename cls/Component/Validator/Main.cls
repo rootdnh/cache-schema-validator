@@ -27,6 +27,17 @@ Method Required() As Component.Validator.Main
 	Return $This
 }
 
+Method String() As Component.Validator.Main
+{
+	If (..Value="") {
+		Do ..Err.%Set("temErro",$$$YES,"boolean")
+		Set erros = ..Err.erros
+		Do:('erros.%IsDefined(..Key)) erros.%Set(..Key,[])
+		Do erros.%Get(..Key).%Push("Required")
+	}
+	Return $This
+}
+
 Method Validate() As %DynamicObject
 {
 	Return ..Err
