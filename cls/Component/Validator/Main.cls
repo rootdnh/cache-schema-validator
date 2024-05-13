@@ -9,21 +9,22 @@ Property Value [ Internal ];
 
 Property Err As %DynamicObject [ Internal ];
 
-Method Init(key) As Component.Validator.Main
+Method Define(key) As Component.Validator.Main
 {
-	Set ..Key = key
-	Set ..Value = ..Request.%Get(key)
+	Set ..Key = key, ..Value = ..Request.%Get(key)
 	Return $This
+}
+
+Method RecordError(ErrorType As %String) As %Status
+{
+	Do ..Err.%Set("hasError", $$$YES, "boolean")
+	Do:('..Err.errors.%IsDefined(..Key)) ..Err.errors.%Set(..Key, [])
+	Do ..Err.errors.%Get(..Key).%Push(ErrorType)
 }
 
 Method Required() As Component.Validator.Main
 {
-	If (..Value="") {
-		Do ..Err.%Set("temErro",$$$YES,"boolean")
-		Set erros = ..Err.erros
-		Do:('erros.%IsDefined(..Key)) erros.%Set(..Key,[])
-		Do erros.%Get(..Key).%Push("Required")
-	}
+	Do:(..Value="") ..RecordError("Required")
 	Return $This
 }
 
@@ -48,8 +49,8 @@ Method %OnNew(request As %DynamicObject) As %Status [ Private, ServerOnly = 1 ]
 	Set ..Request = request
 	
 	Set ..Err = {
-		"temErro": false,
-		"erros": {}
+		"hasError": false,
+		"errors": {}
 	}
 	Return $$$OK
 }

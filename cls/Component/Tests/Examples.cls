@@ -1,18 +1,28 @@
 Class Component.Tests.Examples Extends %RegisteredObject
 {
 
-/// D ##class(Component.Tests.Examples).Test()
-ClassMethod Test(request = {{"nome":"JOAO", "nomeMae":""}})
+ClassMethod DefineSchema(request As %DynamicObject)
 {
-	Set builder = ##class(Component.Validator.Main).%New(request)
+	Set schema = ##class(Component.Validator.Main).%New(request)
+	Do schema.Define("nome").Required()
+	Do schema.Define("nomeMae").Required()
+	Do schema.Define("nomePai").Required()
 	
-	Do builder.Init("nome").Required()
-	Do builder.Init("nomeMae").Required()
-	Do builder.Init("nomePai").Required()
-	
-	Set output = builder.Validate()
-	W output.erros.%ToJSON()
+	Set output = schema.Validate()
+	Write output.errors.%ToJSON()
+}
+
+ClassMethod SetObject() As %Status
+{
+	Set Obj = {}
+	Set Obj.nome = "JOAO"
+	Do ..DefineSchema(Obj)
+	Quit $$$OK
+}
+
+Method MyMethod()
+{
+    Write "Current method name: ", %METHOD, !
 }
 
 }
-
